@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Navy/paper palette, as supplied */
+  --brand-700: #3368A0; /* primary: active nav, buttons, links */
+  --brand-500: #66A3BF; /* secondary: icons, highlights */
+  --brand-200: #C8DFDB; /* tint: hovers, subtle fills, tags */
+  --brand-50:  #F2EFE7; /* base page background (paper) */
+
+  --bg-base: var(--brand-50);
+  --bg-panel: #FFFFFF;
+  --bg-panel-raised: #FBFAF4;
+  --border: #D9E1DD;
+  --border-soft: #E6EAE5;
+
+  --text-primary: #1F2E3D;
+  --text-secondary: #55636F;
+  --text-tertiary: #8A97A0;
+
+  --paper: #FFFFFF; /* literal document/paper preview surface */
+
+  /* Semantic (kept outside the brand palette on purpose — safety colour
+     conventions shouldn't be forced into a brand hue) */
+  --tier1: #4E8FA6;   /* routine */
+  --tier2: #C98A2E;   /* restricted */
+  --tier3: #B5453A;   /* confidential */
+  --ok: #3E8B62;
+
+  --font-sans: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body, #root { height: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+}
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+.pulse-dot { animation: pulse-op 1.8s ease-in-out infinite; }
+@keyframes pulse-op {
+  0% { opacity: 0.7; transform: scale(1); }
+  70% { opacity: 0; transform: scale(2.2); }
+  100% { opacity: 0; transform: scale(2.2); }
+}
+
+.modal-in { animation: modal-in 0.15s ease-out; }
+@keyframes modal-in {
+  from { opacity: 0; transform: translateY(-6px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal-in-side { animation: modal-in-side 0.18s ease-out; }
+@keyframes modal-in-side {
+  from { opacity: 0; transform: translateX(16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.spin-slow { animation: spin-slow 40s linear infinite; }
+@keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+.flow-line { animation: flow-line 3.5s linear infinite; }
+@keyframes flow-line { to { stroke-dashoffset: -36; } }
+
+.node-pulse { animation: node-pulse 3.2s ease-in-out infinite; }
+@keyframes node-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.85; }
+  50% { transform: scale(1.12); opacity: 1; }
+}
+
+.fade-up { animation: fade-up 0.5s ease-out both; }
+@keyframes fade-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse-dot, .modal-in, .modal-in-side, .spin-slow, .flow-line, .node-pulse, .fade-up { animation: none !important; }
+}
+html.force-reduce-motion .pulse-dot,
+html.force-reduce-motion .modal-in,
+html.force-reduce-motion .modal-in-side,
+html.force-reduce-motion .spin-slow,
+html.force-reduce-motion .flow-line,
+html.force-reduce-motion .node-pulse,
+html.force-reduce-motion .fade-up,
+html.force-reduce-motion .blink-cursor {
+  animation: none !important;
+}
+
+.blink-cursor { animation: blink-cursor 1s steps(1) infinite; }
+@keyframes blink-cursor { 50% { opacity: 0; } }
